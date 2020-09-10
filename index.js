@@ -1,3 +1,4 @@
+const axios = require('axios')
 // callback
 const sumNumber = (a, b, callback) => {
     setTimeout(() => {
@@ -25,3 +26,32 @@ substractNumber(10, 2).then((substract) => {
 }).catch((e) => {
     console.log(e)
 })
+
+//promise all and async await
+
+const fetchGithub = async (url) => {
+    try {
+        const githubInfo = await axios(url)
+        return {
+            name: githubInfo.data.name,
+            bio: githubInfo.data.bio,
+            repos: githubInfo.data.public_repos
+        }
+
+    } catch (e) {
+        console.log(e)
+    }
+   
+}
+
+const fetchUser = async (names) => {
+    const requests = await names.map(name => {
+        const url = `https://api.github.com/users/${name}`
+        const user = fetchGithub(url)
+        return user
+    })
+    return Promise.all(requests)
+}
+
+fetchUser(['ayatmaulana', 'slaveofcode', 'galihcitta'])
+.then(user => console.log(JSON.stringify(user)))
