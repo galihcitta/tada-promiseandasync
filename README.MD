@@ -8,7 +8,11 @@ This is task given by Mas Ayat on Mentoring session. The purpose of this task is
 ## Starting the app locally
 
 1) Clone this repository and make sure you have node installed.
-2) Run the app
+2)  Install the depedency
+```
+npm install
+```
+3) Run the app
 ```
 node index.js
 ```
